@@ -44,6 +44,9 @@
     "creationTimestamp": 1630590044194,
     "jwtSecretKey": "Njg1ODNjY2ViODg3MDY3MzQ2ODhhODkwYjdiOTVkMGQxMTM2ZjhhMWNkNzgxMWEyNzE1MTA0MDY1NzNjNGM1ZWNjYWYzNzE4NDliNjlhYTIxODY1NjEzZjBmNmU4MDk4MTg1YTc0NTQ2NWZmOWFmNTZlZGNmOWVmYjYwNjQyZGE=",
     "devServerPort": 4200,
-    "lastLiquibaseTimestamp": 1630590344000
+    "lastLiquibaseTimestamp": 1630590344000,
+    "herokuAppName": "appointementsystem",
+    "herokuDeployType": "git",
+    "herokuJavaVersion": "11"
   }
 }
