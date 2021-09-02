@@ -1,0 +1,28 @@
+{
+  "appointementsystemApp": {
+    "adviser": {
+      "home": {
+        "title": "Advisers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Adviser",
+        "createOrEditLabel": "Create or edit a Adviser",
+        "notFound": "No Advisers found"
+      },
+      "created": "A new Adviser is created with identifier {{ param }}",
+      "updated": "A Adviser is updated with identifier {{ param }}",
+      "deleted": "A Adviser is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Adviser {{ id }}?"
+      },
+      "detail": {
+        "title": "Adviser"
+      },
+      "id": "ID",
+      "registrationNumber": "Registration Number",
+      "company": "Company",
+      "department": "Department",
+      "user": "User",
+      "bank": "Bank"
+    }
+  }
+}

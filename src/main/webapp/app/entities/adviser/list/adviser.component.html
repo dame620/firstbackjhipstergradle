@@ -1,0 +1,102 @@
+<div>
+  <h2 id="page-heading" data-cy="AdviserHeading">
+    <span jhiTranslate="appointementsystemApp.adviser.home.title">Advisers</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="appointementsystemApp.adviser.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-adviser"
+        [routerLink]="['/adviser/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="appointementsystemApp.adviser.home.createLabel"> Create a new Adviser </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="advisers?.length === 0">
+    <span jhiTranslate="appointementsystemApp.adviser.home.notFound">No advisers found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="advisers && advisers.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="registrationNumber">
+            <span jhiTranslate="appointementsystemApp.adviser.registrationNumber">Registration Number</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="company">
+            <span jhiTranslate="appointementsystemApp.adviser.company">Company</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="department">
+            <span jhiTranslate="appointementsystemApp.adviser.department">Department</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="user.login">
+            <span jhiTranslate="appointementsystemApp.adviser.user">User</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="bank.name">
+            <span jhiTranslate="appointementsystemApp.adviser.bank">Bank</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let adviser of advisers; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/adviser', adviser.id, 'view']">{{ adviser.id }}</a>
+          </td>
+          <td>{{ adviser.registrationNumber }}</td>
+          <td>{{ adviser.company }}</td>
+          <td>{{ adviser.department }}</td>
+          <td>
+            {{ adviser.user?.login }}
+          </td>
+          <td>
+            <div *ngIf="adviser.bank">
+              <a [routerLink]="['/bank', adviser.bank?.id, 'view']">{{ adviser.bank?.name }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/adviser', adviser.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/adviser', adviser.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(adviser)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

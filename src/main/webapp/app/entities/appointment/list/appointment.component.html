@@ -1,0 +1,126 @@
+<div>
+  <h2 id="page-heading" data-cy="AppointmentHeading">
+    <span jhiTranslate="appointementsystemApp.appointment.home.title">Appointments</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="appointementsystemApp.appointment.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-appointment"
+        [routerLink]="['/appointment/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="appointementsystemApp.appointment.home.createLabel"> Create a new Appointment </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="appointments?.length === 0">
+    <span jhiTranslate="appointementsystemApp.appointment.home.notFound">No appointments found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="appointments && appointments.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="reason">
+            <span jhiTranslate="appointementsystemApp.appointment.reason">Reason</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="date">
+            <span jhiTranslate="appointementsystemApp.appointment.date">Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="state">
+            <span jhiTranslate="appointementsystemApp.appointment.state">State</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="reportreason">
+            <span jhiTranslate="appointementsystemApp.appointment.reportreason">Reportreason</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="adviser.registrationNumber">
+            <span jhiTranslate="appointementsystemApp.appointment.adviser">Adviser</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="manager.registrationNumber">
+            <span jhiTranslate="appointementsystemApp.appointment.manager">Manager</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of appointments; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/appointment', appointment.id, 'view']">{{ appointment.id }}</a>
+          </td>
+          <td>{{ appointment.reason }}</td>
+          <td>{{ appointment.date | formatMediumDatetime }}</td>
+          <td>{{ appointment.state }}</td>
+          <td>{{ appointment.reportreason }}</td>
+          <td>
+            <div *ngIf="appointment.adviser">
+              <a [routerLink]="['/adviser', appointment.adviser?.id, 'view']">{{ appointment.adviser?.registrationNumber }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="appointment.manager">
+              <a [routerLink]="['/manager', appointment.manager?.id, 'view']">{{ appointment.manager?.registrationNumber }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/appointment', appointment.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/appointment', appointment.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(appointment)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="appointments && appointments.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

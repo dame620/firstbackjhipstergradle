@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="manager">
+      <h2 data-cy="managerDetailsHeading"><span jhiTranslate="appointementsystemApp.manager.detail.title">Manager</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ manager.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="appointementsystemApp.manager.registrationNumber">Registration Number</span></dt>
+        <dd>
+          <span>{{ manager.registrationNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="appointementsystemApp.manager.department">Department</span></dt>
+        <dd>
+          <span>{{ manager.department }}</span>
+        </dd>
+        <dt><span jhiTranslate="appointementsystemApp.manager.user">User</span></dt>
+        <dd>
+          <span>{{ manager.user?.login }}</span>
+        </dd>
+        <dt><span jhiTranslate="appointementsystemApp.manager.company">Company</span></dt>
+        <dd>
+          <div *ngIf="manager.company">
+            <a [routerLink]="['/company', manager.company?.id, 'view']">{{ manager.company?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/manager', manager.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

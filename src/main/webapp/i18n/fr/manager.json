@@ -1,0 +1,27 @@
+{
+  "appointementsystemApp": {
+    "manager": {
+      "home": {
+        "title": "Managers",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Manager",
+        "createOrEditLabel": "Créer ou éditer un Manager",
+        "notFound": "Aucun Manager trouvé"
+      },
+      "created": "Un nouveau Manager a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Manager avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Manager avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Manager {{ id }} ?"
+      },
+      "detail": {
+        "title": "Manager"
+      },
+      "id": "ID",
+      "registrationNumber": "Registration Number",
+      "department": "Department",
+      "user": "User",
+      "company": "Company"
+    }
+  }
+}

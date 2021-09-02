@@ -1,0 +1,29 @@
+{
+  "appointementsystemApp": {
+    "appointment": {
+      "home": {
+        "title": "Appointments",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Appointment",
+        "createOrEditLabel": "Créer ou éditer un Appointment",
+        "notFound": "Aucun Appointment trouvé"
+      },
+      "created": "Un nouveau Appointment a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Appointment avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Appointment avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Appointment {{ id }} ?"
+      },
+      "detail": {
+        "title": "Appointment"
+      },
+      "id": "ID",
+      "reason": "Reason",
+      "date": "Date",
+      "state": "State",
+      "reportreason": "Reportreason",
+      "adviser": "Adviser",
+      "manager": "Manager"
+    }
+  }
+}

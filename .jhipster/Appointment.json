@@ -1,0 +1,47 @@
+{
+  "name": "Appointment",
+  "fields": [
+    {
+      "fieldName": "reason",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "state",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "reportreason",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "adviser",
+      "otherEntityRelationshipName": "appointment",
+      "relationshipName": "adviser",
+      "otherEntityField": "registrationNumber"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "manager",
+      "otherEntityRelationshipName": "appointment",
+      "relationshipName": "manager",
+      "otherEntityField": "registrationNumber"
+    }
+  ],
+  "entityTableName": "appointment",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["Appointementsystem"],
+  "changelogDate": "20210902134144"
+}
