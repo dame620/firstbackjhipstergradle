@@ -20,7 +20,6 @@
     <include file="config/liquibase/changelog/20210902134344_added_entity_Company.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210902134444_added_entity_Bank.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210902134544_added_entity_Adviser.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/00000000000000_initial_schema_add_new_authority.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20210902134144_added_entity_constraints_Appointment.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210902134244_added_entity_constraints_Manager.xml" relativeToChangelogFile="false"/>
