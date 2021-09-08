@@ -89,12 +89,13 @@ public class SecurityConfiguration {
                 .featurePolicy("geolocation 'none'; midi 'none'; sync-xhr 'none'; microphone 'none'; camera 'none'; magnetometer 'none'; gyroscope 'none'; fullscreen 'self'; payment 'none'")
             .and()
                 .frameOptions().disable()
+            
         .and()
             .authorizeExchange()
             .pathMatchers("/").permitAll()
             .pathMatchers("/*.*").permitAll()
             .pathMatchers("/api/authenticate").permitAll()
-            .pathMatchers("/api/register").permitAll()
+            .pathMatchers("/api/register").hasAuthority(AuthoritiesConstants.ADMIN)
             .pathMatchers("/api/activate").permitAll()
             .pathMatchers("/api/account/reset-password/init").permitAll()
             .pathMatchers("/api/account/reset-password/finish").permitAll()
@@ -106,7 +107,10 @@ public class SecurityConfiguration {
             .pathMatchers("/management/health/**").permitAll()
             .pathMatchers("/management/info").permitAll()
             .pathMatchers("/management/prometheus").permitAll()
+            .pathMatchers("/api/advisers/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .pathMatchers("/api/managers/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .pathMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN);
+
         // @formatter:on
         return http.build();
     }
